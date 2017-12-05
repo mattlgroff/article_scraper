@@ -1,18 +1,6 @@
 const cheerio = require("cheerio");
 const request = require("request");
-const mongojs = require("mongojs");
-const databaseUrl = "articles";
-const collections = ["ltt"];
-
-// Use mongojs to hook the database to the db variable
-const db = mongojs(databaseUrl, collections);
-const ltt = db.collection('ltt');
-
-// This makes sure that any errors are logged if mongodb runs into an issue
-db.on("error", error => {
-  console.log("Database Error:", error);
-});
-
+const Articles = require("../models/Articles.js");
 
 module.exports = {
   scrape: function(req, res, url){
@@ -48,25 +36,21 @@ module.exports = {
         //Remove pinned topic from results
         results.shift();
 
-        db.ltt.insert(results);
-
-        res.json({"results":results});
-      }
+        //// pass an array
+        Articles.create(results, function (err, candies) {
+          if (err) {
+            console.error(err);
+            res.json({"Error": err})
+          }
+          else{
+            res.json({"results":candies});
+          }
+        });
+        
+      }//End Else
       
-    });
+    });//End Request
 
-  },
-  comment: function(req, res){
-    db.ltt.findOne({url: req.body.url}, results => {
-
-      console.log(results);
-
-      let comment = results.comment;
-
-      comment.push(req.body.comment);
-    });
-
-    db.ltt.update({url: req.body.url}, {comment:comment}, [options], [callback])
   }
 }
 
