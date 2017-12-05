@@ -85,16 +85,6 @@ function showResults(array){
 
   $("#articleContainer").html("");
     array.forEach(function (currentValue, index, arr) {
-      let commentHtml = "<h3>Comments:</h3><ul>";
-
-      array[index].comments.forEach(function(currentValue, i, arr){
-        $(commentHtml).append(
-          "<li>Comment: "
-         + array[index].comments[i].body 
-         + "<br>Date: " 
-         + array[index].comments[i].date
-         + "</li>");
-      });
 
       let articleHtml = 
         "<div class='card cardMargin col-sm-12 col-xs-12 col-md-12 col-lg-12' id='" 
@@ -104,7 +94,7 @@ function showResults(array){
         + "'>" 
         + array[index].title 
         + "</a>" 
-        + commentHtml 
+        + "<ul id='" + array[index]._id  + "Comments'>Comments: "
         + "</ul>"
         + "<textarea id='" 
         + array[index]._id 
@@ -114,8 +104,21 @@ function showResults(array){
         + "'>Add Comment</button>"
         + "</div>";
 
-      $(articleHtml).append();                  
+      let comments_id = "#" + array[index]._id + "Comments";
       
-      $("#articleContainer").append(articleHtml)
+      array[index].comments.forEach(function(currentValue, i, arr){
+        console.log("Comment Body: " + array[index].comments[i].body);
+        let comment =
+          "<li>Comment: "
+         + array[index].comments[i].body 
+         + "<br>Date: " 
+         + array[index].comments[i].date
+         + "</li>";
+
+         $(comment).appendTo(comments_id)
+      });
+
+      $("#articleContainer").append(articleHtml);
+
     });
 }

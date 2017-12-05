@@ -1,6 +1,7 @@
 const cheerio = require("cheerio");
 const request = require("request");
 const Articles = require("../models/Articles.js");
+const mongoose = require('mongoose');
 
 module.exports = {
   scrape: function(req, res, url){
@@ -53,7 +54,7 @@ module.exports = {
 
   },
   find: function(req, res){
-    Articles.find( (err, docs) =>{
+    Articles.find().sort({date: 1}).exec( (err, docs) =>{
       if(err){
         console.error(err);
         res.json({"error": err});
@@ -62,17 +63,19 @@ module.exports = {
         console.log("Sent Results.");
         res.json({"results": docs});
       }
-    })
+    });
   }
   ,
   comment: function(req, res){
+
+    console.log("ID: " + req.body.id)
 
     let newComment = {
       body: req.body.body,
       date: Date.now()
     }
     
-    Articles.findOneAndUpdate({_id: req.body.id}, {$push: {comments: newComment}}, (err, docs) =>{
+    Articles.findOneAndUpdate({"_id": mongoose.Types.ObjectId(req.body.id)}, {$push: {comments: newComment}}, (err, docs) =>{
       if(err){
         console.error(err);
         res.json({"error": err});
