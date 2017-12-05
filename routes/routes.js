@@ -7,9 +7,19 @@ module.exports = app => {
   //Public Folder
   app.use(express.static(path.join(__dirname, './../public')));
 
-  //Post to create a new food
-  app.post("/", (req, res) => {
+  //Get to find
+  app.get("/find", (req, res) => {
+    controller.find(req, res);
+  });
+
+  //Get to scrape
+  app.get("/scrape", (req, res) => {
     controller.scrape(req, res, url);
+  });
+
+  //Post to comment
+  app.post("/comment", (req, res) => {
+    controller.comment(req, res);
   });
 
 }

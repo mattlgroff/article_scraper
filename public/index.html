@@ -19,41 +19,23 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
 
+  <!-- Front End CSS -->
+  <script rel="stylesheet" href="../assets/css/styles.css"></script>
+
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg animated fadeIn delay-03s" id="mainNav">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/index">LTT News Scraper</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-item nav-link" href="/index.html">Home</a>
-          </li>
 
-          <li class="nav-item">
-            <a class="nav-item nav-link" href="/comments.html">Comments</a>
-          </li>
-        </ul>
-      </div>
+  <div class="container main">
+    <div class="text-center">
+      <h1>LTT News Scraper</h1>
+      <button id="scrapeBtn" class="btn btn-primary">Scrape</button>
     </div>
-  </nav>
-  <span id="user_id" hidden>{{user.id}}</span>
-  <div class="container-fluid">
-    <h1>Test</h1>
-    <button id="scrapeBtn" class="btn btn-primary">Scrape</button>
 
-    <div id="articleContainer" class="container main">
-
+    <div class="row" id="articleContainer">
     </div>
   </div>
-  <div id="wrap">
-    <div id="main" class="container clear-top">
-    </div>
-  </div>
+
 </body>
 
 </html>

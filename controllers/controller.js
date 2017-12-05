@@ -36,20 +36,51 @@ module.exports = {
         //Remove pinned topic from results
         results.shift();
 
-        //// pass an array
-        Articles.create(results, function (err, candies) {
+        //Pass an results into the Articles model.
+        Articles.create(results, function (err, docs) {
           if (err) {
             console.error(err);
-            res.json({"Error": err})
+            res.json({"error": err})
           }
           else{
-            res.json({"results":candies});
+            res.json({"results":docs});
           }
         });
         
       }//End Else
       
     });//End Request
+
+  },
+  find: function(req, res){
+    Articles.find( (err, docs) =>{
+      if(err){
+        console.error(err);
+        res.json({"error": err});
+      }
+      else{
+        console.log("Sent Results.");
+        res.json({"results": docs});
+      }
+    })
+  }
+  ,
+  comment: function(req, res){
+
+    let newComment = {
+      body: req.body.body,
+      date: Date.now()
+    }
+    
+    Articles.findOneAndUpdate({_id: req.body.id}, {$push: {comments: newComment}}, (err, docs) =>{
+      if(err){
+        console.error(err);
+        res.json({"error": err});
+      }
+      else{
+        res.json(docs);
+      }
+    });
 
   }
 }
