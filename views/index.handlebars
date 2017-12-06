@@ -1,15 +1,27 @@
- <div class="container main">
-    <div class="text-center">
-      <h1>LTT News Scraper</h1>
-      <button id="scrapeBtn" class="btn btn-primary">Scrape</button>
+ <!-- Page Header -->
+<header class="masthead" style="background-image: url('img/home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          <h1>LTT News Scraper</h1>
+          <p class="text-muted white"><a href='https://github.com/mattlgroff/article_scraper'>Created by Matt Groff</a></p>
+          <button id="scrapeBtn" class="btn btn-primary">Scrape</button>
+        </div>
+      </div>
     </div>
+  </div>
+</header>
 
-    <div class="row" id="articleContainer">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto" id="articleContainer">
       {{#each results}}
-      <div class='card cardMargin col-sm-12 col-xs-12 col-md-12 col-lg-12' id='{{this.id}}'>
+      <div class='post-preview col-sm-12 col-xs-12 col-md-12 col-lg-12' id='{{this.id}}'>
         <a href='{{this.url}}'>{{{this.title}}}</a>
-        <p>Date Scraped: {{this.date}}</p>
-        <ul id='{{this.id}}Comments'>
+        <p class='post-meta'>Date Scraped: {{this.date}}</p>
+        <ul class='post-subtitle' id='{{this.id}}Comments'>
           {{#each this.comments}}
           <li>{{this.body}}<br>{{this.date}}
           {{/each}}
@@ -18,7 +30,21 @@
         <br>
         <button class='btn btn-primary addCommentBtn' id='{{this.id}}'>Add Comment</button>
       </div>
+      <hr>
       {{/each}}
     </div> 
+  </div>
 </div>
 
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p class="copyright text-muted">Article Source: <a href='https://linustechtips.com'>Linus Tech Tips Forum</a></p>
+        <p class="copyright text-muted">Bootstrap Template Source: <a href='https://startbootstrap.com/template-overviews/clean-blog/'>Clean Blog by BlackrockDigital</a></p>
+        
+      </div>
+    </div>
+  </div>
+</footer>

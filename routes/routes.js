@@ -7,11 +7,6 @@ module.exports = app => {
   //Public Folder
   app.use(express.static(path.join(__dirname, './../public')));
 
-  //Get to find
-  app.get("/find", (req, res) => {
-    controller.find(req, res);
-  });
-
   //Get to scrape
   app.get("/scrape", (req, res) => {
     controller.scrape(req, res, url);
