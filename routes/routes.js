@@ -22,4 +22,9 @@ module.exports = app => {
     controller.comment(req, res);
   });
 
+   //Get to find
+  app.get("/", (req, res) => {
+    controller.find(req, res);
+  });
+
 }

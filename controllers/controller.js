@@ -38,14 +38,15 @@ module.exports = {
         results.shift();
 
         //Pass an results into the Articles model.
-        Articles.create(results, function (err, docs) {
-          if (err) {
-            console.error(err);
-            res.json({"error": err})
-          }
-          else{
-            res.json({"results":docs});
-          }
+        Articles.insertMany(results, {ordered: false})
+        .then(results => {
+          console.log("Scrape complete.");
+          res.json(results);
+        })
+        .catch(err => {
+          //console.error(err);
+          console.log("Scrape complete with errors.");
+          res.json({"error":err})
         });
         
       }//End Else
@@ -54,14 +55,15 @@ module.exports = {
 
   },
   find: function(req, res){
-    Articles.find().sort({date: 1}).exec( (err, docs) =>{
+    Articles.find().limit(20).sort({date: -1}).exec( (err, docs) =>{
       if(err){
         console.error(err);
-        res.json({"error": err});
+        res.send(err);
       }
       else{
         console.log("Sent Results.");
-        res.json({"results": docs});
+        res.render("index", {results:docs})
+        //res.json({"results": docs});
       }
     });
   }

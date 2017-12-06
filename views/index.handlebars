@@ -1,0 +1,24 @@
+ <div class="container main">
+    <div class="text-center">
+      <h1>LTT News Scraper</h1>
+      <button id="scrapeBtn" class="btn btn-primary">Scrape</button>
+    </div>
+
+    <div class="row" id="articleContainer">
+      {{#each results}}
+      <div class='card cardMargin col-sm-12 col-xs-12 col-md-12 col-lg-12' id='{{this.id}}'>
+        <a href='{{this.url}}'>{{{this.title}}}</a>
+        <p>Date Scraped: {{this.date}}</p>
+        <ul id='{{this.id}}Comments'>
+          {{#each this.comments}}
+          <li>{{this.body}}<br>{{this.date}}
+          {{/each}}
+        </ul>
+        <textarea id='{{this.id}}Text' rows='2' cols='50'></textarea>
+        <br>
+        <button class='btn btn-primary addCommentBtn' id='{{this.id}}'>Add Comment</button>
+      </div>
+      {{/each}}
+    </div> 
+</div>
+

@@ -1,11 +1,20 @@
 const express = require('express');
+const exphbs = require("express-handlebars");
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
+
+
+// Handlebars
+app.engine("handlebars", exphbs(
+  { defaultLayout: "main" }
+));
+app.set("view engine", "handlebars");
 
 //Body Parser
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //Routes
 require("./routes/routes.js")(app);
