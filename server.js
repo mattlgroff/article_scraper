@@ -25,12 +25,26 @@ if (process.env.MONGODB_URI){
   console.log("Using MongoDB URI: " + process.env.MONGODB_URI);
   mongoose.connect(process.env.MONGODB_URI, {
     useMongoClient: true
+  })
+  .then(data => {
+    console.log("Connected to MongoDB.");
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit();
   });
 }
 else{
   console.log("Using localhost")
   mongoose.connect("mongodb://localhost/articles", {
     useMongoClient: true
+  })
+  .then(data => {
+    console.log("Connected to MongoDB.");
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit();
   });
 }
 

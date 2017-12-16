@@ -8,6 +8,7 @@
           <h1>LTT News Scraper</h1>
           <p class="text-muted white"><a href='https://github.com/mattlgroff/article_scraper'>Created by Matt Groff</a></p>
           <button id="scrapeBtn" class="btn btn-primary">Scrape</button>
+          <p class="text-muted white">Scroll down to see the articles :)</p>
         </div>
       </div>
     </div>
@@ -19,7 +20,7 @@
     <div class="col-lg-8 col-md-10 mx-auto" id="articleContainer">
       {{#each results}}
       <div class='post-preview col-sm-12 col-xs-12 col-md-12 col-lg-12' id='{{this.id}}'>
-        <a href='{{this.url}}'>{{{this.title}}}</a>
+        <a target="_blank" href='{{this.url}}'>{{{this.title}}}</a>
         <p class='post-meta'>Date Scraped: {{this.date}}</p>
         <ul class='post-subtitle' id='{{this.id}}Comments'>
           {{#each this.comments}}
